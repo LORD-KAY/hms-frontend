@@ -86,11 +86,19 @@ const actions: ActionTree<AuthState, RootState> = {
   async me({ commit, dispatch }) {
     try {
       const response = await ServicesConfig.me();
-      const { firstName, lastName, email, username, id } = response.data.data;
+      const {
+        firstName,
+        lastName,
+        email,
+        username,
+        id,
+        userType,
+      } = response.data.data;
       commit("UPDATE_USER_DETAILS", {
         name: `${firstName} ${lastName}`,
         email,
         username,
+        userType,
         id,
       });
     } catch (e) {
