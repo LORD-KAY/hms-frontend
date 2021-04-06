@@ -104,8 +104,8 @@ const actions: ActionTree<IPatient, RootState> = {
             };
           })
         );
-        console.log(docsWithResponses);
-        // commit("UPDATE_ISSUES", docsWithResponses);
+
+        commit("UPDATE_ISSUES", docsWithResponses);
         commit("UPDATE_PAGINATION", {
           itemsPerPage: limit,
           total: totalPages,
@@ -208,14 +208,8 @@ const actions: ActionTree<IPatient, RootState> = {
       dispatch("isPageLoading", true, { root: true });
       const response = await ServicesConfig.responsesForAnIssue(payload?.id);
       if (response) {
-        const { docs } = response?.data?.data;
-        const { totalPages, page, limit } = response.data?.data;
-        commit("UPDATE_RESPONSES", docs);
-        commit("UPDATE_PAGINATION", {
-          itemsPerPage: limit,
-          total: totalPages,
-          page,
-        });
+        commit("UPDATE_RESPONSES", response?.data?.data);
+
         dispatch("isPageLoading", false, { root: true });
       }
     } catch (e) {
