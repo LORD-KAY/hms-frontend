@@ -24,3 +24,12 @@ docker run -it -d -p 8081:8080 --name hms-frontend hms-frontend
 ```
 Access the app from your browser on http://localhost:8081
 
+### Testing Credentials
+## Admin
+```bash
+username: testing@gmail.com
+password: password
+```
+Then you can create an account for a patient
+
+
