@@ -16,10 +16,26 @@
                 v-for="response in responsesList"
                 :key="response._id"
                 class="d-flex flex-column flex-grow-1"
+                :style="{
+                  alignItems:
+                    userType !== 'doctor' && response.fromPatient
+                      ? 'flex-end'
+                      : 'flex-start',
+                }"
               >
-                <v-chip label class="ft font-weight-medium">
-                  {{ response.comment }}
-                </v-chip>
+                <div class="d-flex flex-row">
+                  <v-chip
+                    label
+                    class="ft font-weight-medium mt-2"
+                    :color="
+                      userType !== 'doctor' && response.fromPatient
+                        ? 'primary'
+                        : 'accent'
+                    "
+                  >
+                    {{ response.comment }}
+                  </v-chip>
+                </div>
               </div>
             </template>
 
@@ -53,6 +69,7 @@ import { namespace } from "vuex-class";
 import { IResponses } from "@/store/modules/patients";
 
 const patientsModule = namespace("patients");
+const authModule = namespace("auth");
 extend("email", {
   ...email,
   message: "Email is not valid",
@@ -72,6 +89,7 @@ extend("required", {
 })
 export default class ViewReplies extends mixins(WidgetMixins) {
   @patientsModule.Getter("getResponsesList") responsesList!: IResponses;
+  @authModule.Getter("getUserType") userType!: string;
   menu = false;
   content = "";
   title = "";
@@ -81,6 +99,7 @@ export default class ViewReplies extends mixins(WidgetMixins) {
     this.$store.dispatch("patients/listOfResponses", {
       id: this.$route.params?.id,
     });
+    this.$store.dispatch("auth/me");
   }
 }
 </script>

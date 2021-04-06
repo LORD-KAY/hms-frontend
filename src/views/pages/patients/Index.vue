@@ -124,7 +124,7 @@ export default class Applications extends mixins(WidgetMixins) {
 
   @Watch("options")
   onOptionsChange(payload: IPaginate): void {
-    this.$store.dispatch("patients", {
+    this.$store.dispatch("patients/listOfIssues", {
       page: payload.page,
       limit: payload.itemsPerPage,
     });
