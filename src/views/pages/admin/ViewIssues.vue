@@ -32,6 +32,34 @@
                         }}</span>
                       </v-card-text>
                     </v-card>
+                    <div v-if="issue.responses && issue.responses.length > 0">
+                      <template v-for="response in issue.responses">
+                        <div
+                          :key="response._id"
+                          class="d-flex flex-column flex-grow-1"
+                          :style="{
+                            alignItems:
+                              userType === 'doctor' && !response.fromPatient
+                                ? 'flex-end'
+                                : 'flex-start',
+                          }"
+                        >
+                          <div class="d-flex flex-row">
+                            <v-chip
+                              label
+                              :color="
+                                userType === 'doctor' && !response.fromPatient
+                                  ? 'primary'
+                                  : 'accent'
+                              "
+                              class="ft font-weight-medium mt-2"
+                              >{{ response.comment }}</v-chip
+                            >
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+
                     <div class="d-flex flex-column flex-grow-1">
                       <div class="d-flex flex-row flex-grow-1 mt-3">
                         <v-text-field
@@ -102,6 +130,7 @@ extend("required", {
   message: "Field is required",
 });
 
+const authModule = namespace("auth");
 @Component({
   components: {
     ValidationProvider,
@@ -117,6 +146,7 @@ extend("required", {
 })
 export default class ViewReplies extends mixins(WidgetMixins) {
   @patientsModule.Getter("getIssuesList") issues!: IIssues;
+  @authModule.Getter("getUserType") userType!: string;
   @Getter("getIsLoading") isLoading!: boolean;
 
   allIssues: IIssues[] = [];
@@ -147,6 +177,7 @@ export default class ViewReplies extends mixins(WidgetMixins) {
       page: 1,
       limit: 12,
     });
+    this.$store.dispatch("auth/me");
   }
 }
 </script>
