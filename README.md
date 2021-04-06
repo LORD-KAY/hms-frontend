@@ -20,7 +20,7 @@ docker build -t hms-frontend .
 ```
 Start the frontend from the Dockerfile
 ```bash
-docker run -it -d -p 8081:8081 --name hms-frontend hms-frontend
+docker run -it -d -p 8081:8080 --name hms-frontend hms-frontend
 ```
 Access the app from your browser on http://localhost:8081
 
