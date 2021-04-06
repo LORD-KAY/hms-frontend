@@ -12,7 +12,13 @@ Navigate to the root directory i.e the hms-frontend
 ```bash
 cd hms-frontend/
 ```
+### Running it locally
+```bash
+    yarn install  or npm install
+   yarn run serve or npm run serve
+```
 
+# OR
 ### Spin up the app frontend container
 Build the image
 ```bash
