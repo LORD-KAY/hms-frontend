@@ -1,32 +1,28 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <v-app light style="background: white !important">
     <router-view />
-  </div>
+  </v-app>
 </template>
+<script>
+import { Component, Vue } from "vue-property-decorator";
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@Component
+export default class App extends Vue {
+  checkConnection() {
+    if (navigator.onLine) {
+      this.$store.dispatch("internet", false, { root: true });
+    } else {
+      this.$store.dispatch("internet", true, { root: true });
+    }
+  }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  created() {
+    if (process.env.NODE_ENV === "production") {
+      // TODO: have to make request whenever the page detects internet and reloads the page
+      setInterval(() => {
+        this.checkConnection();
+      }, 4000);
     }
   }
 }
-</style>
+</script>
