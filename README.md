@@ -5,7 +5,7 @@
 
 ### Clone the repository
 ```bash
-git clone [hms-frontend](https://github.com/LORD-KAY/hms-frontend.git)
+git clone https://github.com/LORD-KAY/hms-frontend.git
 ```
 
 Navigate to the root directory i.e the hms-frontend
