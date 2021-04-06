@@ -1,11 +1,11 @@
 
 # HMS Frontend Application
 > An simple hospital management application frontend application.
-> This application contains the ui connected to the rest api services which can be found here [https://github.com/LORD-KAY/hms-api](hms-api-service)
+> This application contains the ui connected to the rest api services which can be found here [hms-api-service](https://github.com/LORD-KAY/hms-api)
 
 ### Clone the repository
 ```bash
-git clone [https://github.com/LORD-KAY/hms-frontend.git](https://github.com/LORD-KAY/hms-frontend.git)
+git clone [hms-frontend](https://github.com/LORD-KAY/hms-frontend.git)
 ```
 
 Navigate to the root directory i.e the hms-frontend
